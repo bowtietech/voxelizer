@@ -20,6 +20,12 @@ x64/
 [Bb]in/
 [Oo]bj/
 
+
+# CMake
+
+CMakeFiles/*
+examles/CMakeFiles/*
+
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
 
@@ -142,6 +148,10 @@ App_Data/*.ldf
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+
+
+
+
 
 # =========================
 # Windows detritus
