@@ -37,14 +37,17 @@ ENDIF()
 
 INCLUDE_DIRECTORIES(
   ${freenect2_INCLUDE_DIR}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 SET(Protonect_src
   Protonect.cpp
+  Voxelizer/Voxelizer.cpp
 )
 
 SET(Protonect_LIBRARIES
   ${freenect2_LIBRARIES}
+  
 )
 
 SET(Protonect_DLLS
@@ -79,6 +82,7 @@ ADD_EXECUTABLE(Protonect
 
 TARGET_LINK_LIBRARIES(Protonect
   ${Protonect_LIBRARIES}
+  ${OpenCV_LIBS}
 )
 
 IF(WIN32)

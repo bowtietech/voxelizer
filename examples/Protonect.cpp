@@ -36,10 +36,14 @@
 #include <libfreenect2/registration.h>
 #include <libfreenect2/packet_pipeline.h>
 #include <libfreenect2/logger.h>
+
+
 /// [headers]
 #ifdef EXAMPLES_WITH_OPENGL_SUPPORT
 #include "viewer.h"
 #endif
+
+#include "./Voxelizer/Voxelizer.h"
 
 
 bool protonect_shutdown = false; ///< Whether the running application should shut down.
@@ -327,8 +331,8 @@ int main(int argc, char *argv[])
       return -1;
   }
 
-  std::cout << "device serial: " << dev->getSerialNumber() << std::endl;
-  std::cout << "device firmware: " << dev->getFirmwareVersion() << std::endl;
+  std::cout << "Device serial: " << dev->getSerialNumber() << std::endl;
+  std::cout << "Device firmware: " << dev->getFirmwareVersion() << std::endl;
 /// [start]
 
 /// [registration setup]
@@ -350,7 +354,7 @@ int main(int argc, char *argv[])
   {
     if (!listener.waitForNewFrame(frames, 10*1000)) // 10 sconds
     {
-      std::cout << "timeout!" << std::endl;
+      std::cout << "Timeout!" << std::endl;
       return -1;
     }
     libfreenect2::Frame *rgb = frames[libfreenect2::Frame::Color];
@@ -362,6 +366,12 @@ int main(int argc, char *argv[])
     {
 /// [registration]
       registration->apply(rgb, depth, &undistorted, &registered);
+		
+		// Call any OCV code here
+		
+		Voxelizer::processFrame(rgb, ir, depth);
+		
+		
 /// [registration]
     }
 
